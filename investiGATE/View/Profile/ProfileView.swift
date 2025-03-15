@@ -85,8 +85,8 @@ struct ProfileView: View {
                     .padding(.horizontal)
                 
                 HStack {
-                    DocumentButton(title: "Resume", date: "Last Updated: 11/14")
-                    DocumentButton(title: "Portfolio", date: "+")
+                    DocumentButton(title: "Resume")
+                    DocumentButton(title: "Portfolio")
                 }
                 .padding(.horizontal)
                 
