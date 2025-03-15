@@ -32,8 +32,7 @@ struct SplashView: View {
                     
                     VStack {
                         NavigationLink {
-                            SignUpView(tempUser: tempUser)
-                            //OnboardingController(user: $tempUser)
+                            OnboardingController(user: $tempUser)
                         } label: {
                             GenButton(placeholder: "Let's get started!", backgroundColor: Color.prim, foregroundColor: Color.white, imageRight: "arrow.right", isSystemImage: true)
                         }

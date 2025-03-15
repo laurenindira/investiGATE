@@ -132,7 +132,7 @@ class AuthViewModel: NSObject, ObservableObject {
                             }
                         }
                     } else {
-                        let newUser = User(id: uid, displayName: fullName, email: tempUser.email, creationDate: Date(), providerRef: "google", isProfessor: tempUser.isProfessor, researchInterests: tempUser.researchInterests, majorDepartment: tempUser.majorDepartment, bio: "", profilePicture: "", gradDate: tempUser.gradDate ?? nil, currentYear: tempUser.currentYear ?? nil, link: [])
+                        let newUser = User(id: uid, displayName: fullName, email: email, creationDate: Date(), providerRef: "google", isProfessor: tempUser.isProfessor, researchInterests: tempUser.researchInterests, majorDepartment: tempUser.majorDepartment, bio: "", profilePicture: "", gradDate: tempUser.gradDate ?? nil, currentYear: tempUser.currentYear ?? nil, link: [])
                       
                         Task {
                             do {
