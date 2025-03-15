@@ -16,7 +16,7 @@ class AuthViewModel: NSObject, ObservableObject {
     var user: User? {
         didSet {
             if let currentUser = user {
-                saveUserToCache(currentUser)
+                saveUserToCache(user: currentUser)
                 userDefaults.set(currentUser != nil, forKey: "isSignedIn")
             } else {
                 clearUserCache()
@@ -28,12 +28,12 @@ class AuthViewModel: NSObject, ObservableObject {
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
     
-    //local caching
+    //local caching 
     private let userDefaults = UserDefaults.standard
     private let userKey = "cachedUser"
     
     //loading and errors
-    var isLoading: Bool
+    var isLoading: Bool = false
     var errorMessage: String?
     
     //testing for signed in status
@@ -51,11 +51,11 @@ class AuthViewModel: NSObject, ObservableObject {
     }
     
     //MARK: - Sign up
-    func signUpWithEmail(tempUser: User) async throws {
+    func signUpWithEmail(tempUser: User, password: String) async throws {
         self.isLoading = true
         
         do {
-            let result = try await auth.createUser(withEmail: tempUser.email, password: tempUser.password)
+            let result = try await auth.createUser(withEmail: tempUser.email, password: password)
             let user = User(id: result.user.uid, displayName: tempUser.displayName, email: tempUser.email, creationDate: Date(), providerRef: "email/password", isProfessor: tempUser.isProfessor, researchInterests: tempUser.researchInterests, majorDepartment: tempUser.majorDepartment, bio: "", profilePicture: "", gradDate: tempUser.gradDate ?? nil, currentYear: tempUser.currentYear ?? nil, link: [])
             self.user = user
             try await saveUserToFirestore(user: user)
@@ -72,11 +72,11 @@ class AuthViewModel: NSObject, ObservableObject {
 
     //MARK: - Sign in
     func signInWithEmail(email: String, password: String) async throws {
-        self.isLoading = trye
+        self.isLoading = true
         
         do {
             let result = try await auth.signIn(withEmail: email, password: password)
-            await loadUserFromFirestore()
+            await loadUserFromFirebase()
             UserDefaults.standard.set(true, forKey: "isSignedIn")
             self.isLoading = false
         } catch let error as NSError {
@@ -87,8 +87,8 @@ class AuthViewModel: NSObject, ObservableObject {
         }
     }
     
-    func signInWithGoogle(tempUser: USer, presenting: UIViewController, completion: @escaping(Error?) -> Void) {
-        self.isLoading = trye
+    func signInWithGoogle(tempUser: User, presenting: UIViewController, completion: @escaping(Error?) -> Void) {
+        self.isLoading = true
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
         let config = GIDConfiguration(clientID: clientID)
@@ -126,7 +126,6 @@ class AuthViewModel: NSObject, ObservableObject {
                         if let data = document.data() {
                             Task {
                                 await self.loadUserFromFirebase()
-                                await self.updateLastSignIn(for: uid)
                                 UserDefaults.standard.set(true, forKey: "isSignedIn")
                             }
                         }
@@ -137,7 +136,7 @@ class AuthViewModel: NSObject, ObservableObject {
                             do {
                                 try await self.saveUserToFirestore(user: newUser)
                                 self.user = newUser
-                                self.saveUserToCache(newUser)
+                                self.saveUserToCache(user: newUser)
                                 UserDefaults.standard.set(true, forKey: "isSignedIn")
                                 self.isLoading = false
                             } catch {
@@ -153,20 +152,20 @@ class AuthViewModel: NSObject, ObservableObject {
     }
     
     //MARK: - Saving user data
-    func saveUserToFirestore(user: User) {
+    func saveUserToFirestore(user: User) async throws {
         do {
-            try await db.collection("users").document(user.id).setDate([
+            try await db.collection("users").document(user.id).setData([
                 "id": user.id,
                 "displayName": user.displayName,
                 "email": user.email,
-                "creationDate": Timestamp(user.creationDate),
+                "creationDate": Timestamp(date: user.creationDate),
                 "providerRef": user.providerRef,
                 "isProfessor": user.isProfessor,
                 "reserchInterests": user.researchInterests,
                 "majorDepartment": user.majorDepartment,
                 "bio": user.bio,
                 "profilePicture": user.profilePicture,
-                "gradDate": Timestamp(user.gradDate),
+                "gradDate": Timestamp(date: user.gradDate ?? Date()),
                 "currentYear": user.currentYear,
                 "link": user.link
             ])
@@ -211,13 +210,13 @@ class AuthViewModel: NSObject, ObservableObject {
         self.isLoading = true
         
         do {
-            if auth.currentUser.uid != nil {
+            if auth.currentUser?.uid != nil {
                 try auth.signOut()
                 self.user = nil
                 clearUserCache()
             }
             self.isLoading = false
-        } else let error as NSError {
+        } catch let error as NSError {
             self.errorMessage = error.localizedDescription
             print("ERROR: Sign out error - \(String(describing: errorMessage))")
             self.isLoading = false
@@ -257,7 +256,7 @@ class AuthViewModel: NSObject, ObservableObject {
     }
     
     private func loadUserFromCache() -> User? {
-        guard let savedUserData = userDefaults.data(forKey: userKey) else { return }
+        guard let savedUserData = userDefaults.data(forKey: userKey) else { return nil }
         return try? JSONDecoder().decode(User.self, from: savedUserData)
     }
 
