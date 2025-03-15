@@ -28,9 +28,10 @@ struct ProfileView: View {
                         Text("jon")
                             .font(.title)
                             .bold()
+                            .foregroundColor(Color.darkblue)
                         
                         Text("junior cs + english major")
-                            .foregroundColor(.blue)
+                            .foregroundColor(Color.lightblue)
                     }
                     
                     Spacer()
@@ -49,17 +50,20 @@ struct ProfileView: View {
                 Text("Research Interests")
                     .font(.headline)
                     .padding(.horizontal)
+                    .foregroundColor(Color.darkblue)
                 
                 // Current Projects
                 Text("Current Projects")
                     .font(.headline)
                     .padding(.horizontal)
+                    .foregroundColor(Color.darkblue)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
                         ProjectCard(project: project)
                     }
                     .padding(.horizontal)
+                    .padding(.bottom, 60)
                     .frame(height: 300)
                 }
                 
@@ -67,13 +71,15 @@ struct ProfileView: View {
                 Text("Past Projects")
                     .font(.headline)
                     .padding(.horizontal)
+                    .foregroundColor(Color.darkblue)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
                         ProjectCard(project: project)
                     }
                     .padding(.horizontal)
-                    .frame(height: 310)
+                    .padding(.bottom, 60)
+                    .frame(height: 300)
                 }
                 
                 // Saved Projects
@@ -89,6 +95,7 @@ struct ProfileView: View {
                 Text("My Documents")
                     .font(.headline)
                     .padding(.horizontal)
+                    .foregroundColor(Color.darkblue)
                 
                 HStack {
                     DocumentButton(title: "Resume")
