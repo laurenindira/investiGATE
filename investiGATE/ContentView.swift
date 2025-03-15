@@ -17,7 +17,11 @@ struct ContentView: View {
                 SplashView()
                     .environmentObject(auth)
             } else {
-                tempDash()
+                TabView {
+                  DashboardView()
+                .tabItem {
+                    Label("Dashboard", systemImage: "house")
+                }
             }
         }
     }
