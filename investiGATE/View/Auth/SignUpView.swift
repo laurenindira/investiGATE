@@ -14,7 +14,6 @@ struct SignUpView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     
-    @State var displayName: String = ""
     @State var email: String = ""
     @State var password: String = ""
     @State var confirmPassword: String = ""
@@ -40,15 +39,15 @@ struct SignUpView: View {
                 Spacer()
                 
                 //LOGO
-                Text("this is a logo")
+                Image("investigate_wordmark")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: UIScreen.main.bounds.width * 0.8)
+                
+                Spacer()
                 
                 //FIELDS
                 VStack {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text("display name")
-                        GenTextField(placeholder: "email", text: $email)
-                    }
-                    
                     VStack(alignment: .leading, spacing: 5) {
                         Text("email")
                         GenTextField(placeholder: "email", text: $email)
@@ -56,15 +55,17 @@ struct SignUpView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Text("password")
-                        GenTextField(placeholder: "password", text: $email)
+                        GenTextField(placeholder: "password", text: $password)
                     }
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Text("confirm password")
-                        GenTextField(placeholder: "confirm password", text: $email)
+                        GenTextField(placeholder: "confirm password", text: $confirmPassword)
                     }
                 }
                 .padding(.bottom, 40)
+                
+                Spacer()
                 
                 //BUTTONS
                 Button {
