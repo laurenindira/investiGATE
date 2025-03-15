@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-import SwiftUI
-
-import SwiftUI
-
 struct ProfileView: View {
+    @State var project: Project
+//    @State var user: User
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -26,7 +25,7 @@ struct ProfileView: View {
                         .overlay(Circle().stroke(Color.gray, lineWidth: 2))
                     
                     VStack(alignment: .leading) {
-                        Text("Sam Charger")
+                        Text("jon")
                             .font(.title)
                             .bold()
                         
@@ -56,7 +55,13 @@ struct ProfileView: View {
                     .font(.headline)
                     .padding(.horizontal)
                 
-                ProjectCardView(title: "title", date: "date")
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ProjectCard(project: project)
+                    }
+                    .padding(.horizontal)
+                    .frame(height: 300)
+                }
                 
                 // Past Projects
                 Text("Past Projects")
@@ -64,10 +69,11 @@ struct ProfileView: View {
                     .padding(.horizontal)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ProjectCardView(title: "title", date: "date")
+                    HStack(spacing: 15) {
+                        ProjectCard(project: project)
                     }
                     .padding(.horizontal)
+                    .frame(height: 310)
                 }
                 
                 // Saved Projects
@@ -98,6 +104,18 @@ struct ProfileView: View {
 }
 
 
+let sampleProject = Project(
+    id: "1",
+    title: "GRNsight: Defining Gene Regulatory Networks",
+    departments: ["CMSI", "BIOL"],
+    topics: ["Genes", "Web Development"],
+    projectLead: "Dondi",
+    projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
+    team: ["1", "2"],
+    requirements: "Bio or CMSI major",
+    hiring: false
+)
+
 #Preview {
-    ProfileView()
+    ProfileView(project: sampleProject)
 }

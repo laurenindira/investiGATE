@@ -37,7 +37,7 @@ struct ProjectCard: View {
                 
             }
         }
-        .frame(maxWidth: 160, maxHeight: 270, alignment: .top)
+        //.frame(maxWidth: 160, maxHeight: 270, alignment: .top)
         
     }
 }
