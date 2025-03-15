@@ -20,9 +20,22 @@
 		A5867D002D85F18F00AF3470 /* investiGATE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = investiGATE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A5867DC72D861F4700AF3470 /* Exceptions for "investiGATE" folder in "investiGATE" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A5867CFF2D85F18F00AF3470 /* investiGATE */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A5867D022D85F18F00AF3470 /* investiGATE */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A5867DC72D861F4700AF3470 /* Exceptions for "investiGATE" folder in "investiGATE" target */,
+			);
 			path = investiGATE;
 			sourceTree = "<group>";
 		};
@@ -283,6 +296,7 @@
 				DEVELOPMENT_TEAM = 9TPA5PBLX8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = investiGATE/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -312,6 +326,7 @@
 				DEVELOPMENT_TEAM = 9TPA5PBLX8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = investiGATE/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

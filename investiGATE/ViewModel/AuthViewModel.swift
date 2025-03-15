@@ -13,6 +13,8 @@ import GoogleSignIn
 
 @Observable
 class AuthViewModel: NSObject, ObservableObject {
+    static var shared = AuthViewModel()
+    
     var user: User? {
         didSet {
             if let currentUser = user {
@@ -163,10 +165,10 @@ class AuthViewModel: NSObject, ObservableObject {
                 "isProfessor": user.isProfessor,
                 "reserchInterests": user.researchInterests,
                 "majorDepartment": user.majorDepartment,
-                "bio": user.bio,
-                "profilePicture": user.profilePicture,
+                "bio": user.bio ?? "",
+                "profilePicture": user.profilePicture ?? "",
                 "gradDate": Timestamp(date: user.gradDate ?? Date()),
-                "currentYear": user.currentYear,
+                "currentYear": user.currentYear ?? "",
                 "link": user.link
             ])
         } catch let error as NSError {
