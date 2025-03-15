@@ -15,14 +15,15 @@ struct DocumentButton: View {
         VStack {
             Text(title)
                 .bold()
+                .foregroundColor(Color.darkblue)
             
             Text(date)
                 .font(.footnote)
                 .foregroundColor(.gray)
         }
-        .frame(width: 120, height: 80)
-        .background(Color.blue.opacity(0.2))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .frame(width: 125, height: 125)
+        .background(Color.document)
+        .clipShape(RoundedRectangle(cornerRadius: 25))
     }
 }
 
