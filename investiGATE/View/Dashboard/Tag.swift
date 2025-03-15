@@ -20,7 +20,7 @@ struct Tag: View {
 
 
 struct Tag_Previews: PreviewProvider {
-    static let keywords = ["CMSI", "BIOL", "MATH", "PHYS", "CHEM", "UNKNOWN", "HIRING", "ONGOING", "CONCLUDED", "NOTHIRING"]
+    static let keywords = ["CMSI", "BIOL", "MATH", "PHYS", "CHEM", "UNKNOWN", "HIRING", "ONGOING", "CONCLUDED", "NOT HIRING"]
     static var previews: some View {
         VStack {
             ForEach(keywords, id: \.self) { word in

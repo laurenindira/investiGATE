@@ -34,7 +34,7 @@ enum TagColor {
         case "ONGOING": return TagColor.ONGOING.color
         case "HIRING": return TagColor.HIRING.color
         case "CONCLUDED": return TagColor.CONCLUDED.color
-        case "NOTHIRING": return TagColor.NOTHIRING.color
+        case "NOT HIRING": return TagColor.NOTHIRING.color
         default: return .gray // Default color for unknown majors
         }
     }

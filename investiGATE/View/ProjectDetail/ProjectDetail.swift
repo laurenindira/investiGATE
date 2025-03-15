@@ -35,17 +35,16 @@ struct ProjectDetail: View {
                         .bold()
                     
                     HStack {
-                        Text(project.departments.joined(separator: " | "))
+                        Text(project.departments.joined(separator: " + "))
+                            .foregroundColor(.gray)
+                            .font(.subheadline)
+                        
+                        Text(" | ")
                             .foregroundColor(.gray)
                             .font(.subheadline)
                         
                         ForEach(project.topics, id: \.self) { topic in
-                            Text(topic)
-                                .font(.caption)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(Color.gray.opacity(0.2))
-                                .clipShape(Capsule())
+                            Tag(keyword: topic)
                         }
                     }
                 }
@@ -87,8 +86,8 @@ struct ProjectDetail: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
                             ForEach(project.team, id: \.self) { member in
-                                VStack {
-                                    Image(systemName: "person.circle.fill")
+                                VStack(alignment: .leading) {
+                                    Image(systemName: "person.fill")
                                         .resizable()
                                         .frame(width: 70, height: 70)
                                         .foregroundColor(.gray)
@@ -98,9 +97,9 @@ struct ProjectDetail: View {
                                         .bold()
                                         .foregroundColor(Color.prim)
                                     
-                                    Text("Affiliation")
+                                    Text("Major(s)")
                                         .font(.caption2)
-                                        .foregroundColor(.gray)
+                                        .foregroundColor(Color.prim)
                                 }
                             }
                         }
@@ -112,7 +111,7 @@ struct ProjectDetail: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Who we’re looking for")
                         .font(.headline)
-                        .foregroundColor(Color.blue)
+                        .foregroundColor(Color.prim)
                     
                     Text(project.requirements)
                         .font(.body)
@@ -143,7 +142,7 @@ let sampleUser = User(
     researchInterests: ["Artificial Intelligence", "Human-Computer Interaction"],
     majorDepartment: ["Computer Science", "English"],
     bio: "Passionate about CS and literature, exploring research in AI and UX design.",
-    profilePicture: nil, // Can be a URL string if using Firebase Storage
+    profilePicture: nil,
     gradDate: Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 15)),
     currentYear: "Junior",
     link: [
@@ -156,9 +155,9 @@ let sampleProject = Project(
     id: "1",
     title: "GRNsight: Defining Gene Regulatory Networks",
     departments: ["CMSI", "BIOL"],
-    topics: ["Genes", "Web Development"],
+    topics: ["Hiring", "Not hiring"],
     projectLead: "Dondi",
-    description: "Modeling gene regulatory networks and protein-protein interactions. Analyzing data structures for gene functions.",
+    description: "Lorem ipsum odor amet, consectetuer adipiscing elit. Risus hac etiam enim placerat; rhoncus morbi sapien. Dictum laoreet dui sem malesuada ante. Amet elementum tempor per maecenas commodo. Primis at praesent est potenti ridiculus torquent. Tempor ante lobortis; fames placerat rutrum mi natoque. Venenatis malesuada id a cursus dictumst iaculis. Condimentum iaculis ac maecenas fringilla velit litora convallis natoque. Consequat felis dui fusce viverra blandit finibus.",
     team: ["1", "2", "3"],
     requirements: "Bio or CMSI major with interest in computational biology.",
     hiring: true
