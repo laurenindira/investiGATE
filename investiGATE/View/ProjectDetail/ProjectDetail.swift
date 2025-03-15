@@ -11,6 +11,8 @@ struct ProjectDetail: View {
     @State var project: Project
     @State var user: User
     
+    @State private var isFavorited: Bool = false
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -25,6 +27,13 @@ struct ProjectDetail: View {
                             .foregroundColor(.black)
                     }
                     Spacer()
+                    
+                    Button(action: {
+                        isFavorited.toggle()
+                    }) {
+                        Image(systemName: isFavorited ? "star.fill" : "star")
+                            .foregroundColor(isFavorited ? .yellow : .black)
+                    }
                 }
                 .padding(.horizontal)
                 
