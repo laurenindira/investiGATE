@@ -94,22 +94,8 @@ struct ProjectDetail: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
-                            ForEach(project.team, id: \.self) { member in
-                                VStack(alignment: .leading) {
-                                    Image(systemName: "person.fill")
-                                        .resizable()
-                                        .frame(width: 70, height: 70)
-                                        .foregroundColor(.gray)
-                                    
-                                    Text("Member Name")
-                                        .font(.caption)
-                                        .bold()
-                                        .foregroundColor(Color.prim)
-                                    
-                                    Text("Major(s)")
-                                        .font(.caption2)
-                                        .foregroundColor(Color.prim)
-                                }
+                            ForEach(getTeamMembers(for: project), id: \.id) { member in
+                                MemberCard(user: member)
                             }
                         }
                     }
@@ -139,26 +125,30 @@ struct ProjectDetail: View {
             .padding(.top, 20)
         }
     }
+    
+    func getTeamMembers(for project: Project) -> [User] {
+        return sampleUser.filter { project.team.contains($0.id) }
+    }
 }
 
-let sampleUser = User(
-    id: "123",
-    displayName: "Sam Charger",
-    email: "sam.charger@email.com",
-    creationDate: Date(),
-    providerRef: "google",
-    isProfessor: false,
-    researchInterests: ["Artificial Intelligence", "Human-Computer Interaction"],
-    majorDepartment: ["Computer Science", "English"],
-    bio: "Passionate about CS and literature, exploring research in AI and UX design.",
-    profilePicture: nil,
-    gradDate: Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 15)),
-    currentYear: "Junior",
-    link: [
-        UserLinks(linkName: "LinkedIn", linkURL: "https://www.linkedin.com/in/samcharger"),
-        UserLinks(linkName: "GitHub", linkURL: "https://github.com/samcharger")
+//TODO: add actual fetching froom database
+let sampleUser: [User] = [
+        User(id: "1", displayName: "Alice Johnson", email: "alice@email.com",
+             creationDate: Date(), providerRef: "google", isProfessor: false,
+             researchInterests: ["AI", "Bioinformatics"], majorDepartment: ["CMSI", "BIOL"],
+             bio: "Bioinformatics enthusiast.", profilePicture: nil, gradDate: nil, currentYear: "Senior",
+             link: []),
+        User(id: "2", displayName: "Bob Smith", email: "bob@email.com",
+             creationDate: Date(), providerRef: "email", isProfessor: false,
+             researchInterests: ["HCI", "ML"], majorDepartment: ["CS"],
+             bio: "Passionate about machine learning.", profilePicture: nil, gradDate: nil, currentYear: "Junior",
+             link: []),
+        User(id: "3", displayName: "Charlie Davis", email: "charlie@email.com",
+             creationDate: Date(), providerRef: "google", isProfessor: false,
+             researchInterests: ["Cybersecurity"], majorDepartment: ["CS"],
+             bio: "Exploring security in AI applications.", profilePicture: nil, gradDate: nil, currentYear: "Senior",
+             link: [])
     ]
-)
 
 let sampleProject = Project(
     id: "1",
@@ -173,5 +163,5 @@ let sampleProject = Project(
 )
 
 #Preview {
-    ProjectDetail(project: sampleProject, user: sampleUser)
+    ProjectDetail(project: sampleProject, user: sampleUser.first!)
 }
