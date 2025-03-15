@@ -36,6 +36,7 @@ struct DashboardView: View {
                             Spacer()
                         }
                     }
+                    .padding(.top)
                     
                     
                     
@@ -49,6 +50,7 @@ struct DashboardView: View {
                         }
                         
                     }
+                    .padding(.top)
                 }
             }
             .padding()
