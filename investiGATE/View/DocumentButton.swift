@@ -23,7 +23,7 @@ struct DocumentButton: View {
         }
         .frame(width: 125, height: 125)
         .background(Color.document)
-        .clipShape(RoundedRectangle(cornerRadius: 25))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 
