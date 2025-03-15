@@ -14,13 +14,13 @@ struct Tag: View {
             .font(.caption)
             .foregroundColor(.white)
             .padding(7)
-            .background(.purple.opacity(0.75), in: Capsule())
+            .background(TagColor.from(keyword), in: Capsule())
     }
 }
 
 
 struct Tag_Previews: PreviewProvider {
-    static let keywords = ["CMSI", "BIOL"]
+    static let keywords = ["CMSI", "BIOL", "MATH", "PHYS", "CHEM", "UNKNOWN"]
     static var previews: some View {
         VStack {
             ForEach(keywords, id: \.self) { word in
