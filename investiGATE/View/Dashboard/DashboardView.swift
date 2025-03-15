@@ -15,34 +15,43 @@ struct DashboardView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    ScrollView {
+                    VStack(alignment: .leading) {
+                        Text("Fresh out the gate")
+                            
                         HStack {
-                            //                        carousel w/ 5 recently added projects
                             ForEach(recentProjects, id: \.self) { project in
                                 ProjectCard(project: project)
                             }
+                            Spacer()
+                        }
+                    }
+                    
+
+                    VStack(alignment: .leading) {
+                        Text("These might spark your interest")
+                        HStack {
+                            ForEach(recommendedProjects, id: \.self) { project in
+                                ProjectCard(project: project)
+                            }
+                            Spacer()
                         }
                     }
                     
                     
-                    Text("These might spark your interest")
-                    HStack {
+                    
+                    VStack(alignment: .leading) {
+                        Text("What you're working on")
+                        HStack {
+                            ForEach(currentProjects, id: \.self) { project in
+                                ProjectCard(project: project)
+                            }
+                            Spacer()
+                        }
                         
-                        ForEach(recommendedProjects, id: \.self) { project in
-                            ProjectCard(project: project)
-                        }
-                    }
-                    
-                    Text("What you're working on")
-                    HStack {
-                        ForEach(currentProjects, id: \.self) { project in
-                            ProjectCard(project: project)
-                        }
                     }
                 }
-                
             }
-            
+            .padding()
         }
         
     }

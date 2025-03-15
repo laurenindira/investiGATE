@@ -13,7 +13,7 @@ struct Tag: View {
         Text(keyword)
             .font(.caption)
             .foregroundColor(.white)
-            .padding()
+            .padding(7)
             .background(.purple.opacity(0.75), in: Capsule())
     }
 }
