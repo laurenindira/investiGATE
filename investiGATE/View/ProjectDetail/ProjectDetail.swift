@@ -126,6 +126,7 @@ struct ProjectDetail: View {
         }
     }
     
+    // functions
     func getTeamMembers(for project: Project) -> [User] {
         return sampleUser.filter { project.team.contains($0.id) }
     }
