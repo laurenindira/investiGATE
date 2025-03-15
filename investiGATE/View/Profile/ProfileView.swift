@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @State var project: Project
-//    @State var user: User
+    @State var user: User
     
     var body: some View {
         ScrollView {
@@ -25,7 +25,7 @@ struct ProfileView: View {
                         .overlay(Circle().stroke(Color.gray, lineWidth: 2))
                     
                     VStack(alignment: .leading) {
-                        Text("jon")
+                        Text(user.displayName)
                             .font(.title)
                             .bold()
                             .foregroundColor(Color.darkblue)
@@ -111,6 +111,25 @@ struct ProfileView: View {
 }
 
 
+let sampleUser = User(
+    id: "123",
+    displayName: "Sam Charger",
+    email: "sam.charger@email.com",
+    creationDate: Date(),
+    providerRef: "google",
+    isProfessor: false,
+    researchInterests: ["Artificial Intelligence", "Human-Computer Interaction"],
+    majorDepartment: ["Computer Science", "English"],
+    bio: "Passionate about CS and literature, exploring research in AI and UX design.",
+    profilePicture: nil,
+    gradDate: Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 15)),
+    currentYear: "Junior",
+    link: [
+        UserLinks(linkName: "LinkedIn", linkURL: "https://www.linkedin.com/in/samcharger"),
+        UserLinks(linkName: "GitHub", linkURL: "https://github.com/samcharger")
+    ]
+)
+
 let sampleProject = Project(
     id: "1",
     title: "GRNsight: Defining Gene Regulatory Networks",
@@ -124,5 +143,5 @@ let sampleProject = Project(
 )
 
 #Preview {
-    ProfileView(project: sampleProject)
+    ProfileView(project: sampleProject, user: sampleUser)
 }
