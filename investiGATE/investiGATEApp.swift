@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct investiGATEApp: App {
+    @UIApplicationDelegateAdaptor(investiGATEAppDelegate.self) var appDelegate
+    @AppStorage("isSignedIn") var isSignedIn = false
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
