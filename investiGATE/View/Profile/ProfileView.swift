@@ -12,139 +12,136 @@ struct ProfileView: View {
     @State var user: User
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                
-                HStack {
-                    Text("My Profile")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(.black)
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
                     
-                    Spacer()
-                    
-                    Button(action: {
-                        // TODO: go to settings page
-                    }) {
-                        Image(systemName: "gearshape.fill")
-                            .font(.title2)
-                            .foregroundColor(Color.prim)
-                    }
-                }
-                .padding(.horizontal)
-                
-                // Profile Header
-                HStack {
-                    if let profileURL = user.profilePicture, let url = URL(string: profileURL) {
-                        AsyncImage(url: url) { image in
-                            image.resizable()
-                                .scaledToFill()
-                        } placeholder: {
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                .foregroundColor(.gray)
-                        }
-                        .frame(width: 80, height: 80)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                    } else {
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
+                    // Profile Header
+                    HStack {
+                        if let profileURL = user.profilePicture, let url = URL(string: profileURL) {
+                            AsyncImage(url: url) { image in
+                                image.resizable()
+                                    .scaledToFill()
+                            } placeholder: {
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .foregroundColor(.gray)
+                            }
                             .frame(width: 80, height: 80)
-                            .foregroundColor(.gray)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        Text(user.displayName)
-                            .font(.title)
-                            .bold()
-                            .foregroundColor(Color.prim)
+                        } else {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .frame(width: 80, height: 80)
+                                .foregroundColor(.gray)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                        }
                         
-                        Text(user.majorDepartment.joined(separator: ", "))
-                            .foregroundColor(Color.sec)
-                    }
-                }
-                .padding(.horizontal)
-                
-                // Research Interests
-                Text("Research Interests")
-                    .font(.headline)
-                    .padding(.horizontal)
-                    .foregroundColor(Color.prim)
-                
-                if user.researchInterests.isEmpty {
-                    Text("No research interests added yet.")
-                        .foregroundColor(.gray)
-                        .padding(.horizontal)
-                } else {
-                    FlowLayout(spacing: 10) {
-                        ForEach(user.researchInterests, id: \.self) { interest in
-                            Tag(keyword: interest)
+                        VStack(alignment: .leading) {
+                            Text(user.displayName)
+                                .font(.title)
+                                .bold()
+                                .foregroundColor(Color.prim)
+                            
+                            Text(user.majorDepartment.joined(separator: ", "))
+                                .foregroundColor(Color.sec)
                         }
                     }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.surface)
-                    .cornerRadius(10)
                     .padding(.horizontal)
-                }
-                
-                // Current Projects
-                Text("Current Projects")
-                    .font(.headline)
-                    .padding(.horizontal)
-                    .foregroundColor(Color.prim)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 15) {
-                        ProjectCard(project: project)
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, 60)
-                    .frame(height: 300)
-                }
-                
-                // Past Projects
-                Text("Past Projects")
-                    .font(.headline)
-                    .padding(.horizontal)
-                    .foregroundColor(Color.prim)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 15) {
-                        ProjectCard(project: project)
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, 60)
-                    .frame(height: 300)
-                }
-                
-                // Saved Projects
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Saved Projects")
+                    
+                    // Research Interests
+                    Text("Research Interests")
                         .font(.headline)
-                    Text("Looks like you don’t have any projects saved!")
-                        .foregroundColor(.gray)
-                }
-                .padding(.horizontal)
-                
-                // My Documents
-                Text("My Documents")
-                    .font(.headline)
+                        .padding(.horizontal)
+                        .foregroundColor(Color.prim)
+                    
+                    if user.researchInterests.isEmpty {
+                        Text("No research interests added yet.")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal)
+                    } else {
+                        FlowLayout(spacing: 10) {
+                            ForEach(user.researchInterests, id: \.self) { interest in
+                                Tag(keyword: interest)
+                            }
+                        }
+                        .padding()
+                        .background {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.surface)
+                                .frame(width: UIScreen.main.bounds.width)
+                        }
+                    }
+                    
+                    // Current Projects
+                    Text("Current Projects")
+                        .font(.headline)
+                        .padding(.horizontal)
+                        .foregroundColor(Color.prim)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 15) {
+                            ProjectCard(project: project)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 60)
+                        .frame(height: 300)
+                    }
+                    
+                    // Past Projects
+                    Text("Past Projects")
+                        .font(.headline)
+                        .padding(.horizontal)
+                        .foregroundColor(Color.prim)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 15) {
+                            ProjectCard(project: project)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 60)
+                        .frame(height: 300)
+                    }
+                    
+                    // Saved Projects
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Saved Projects")
+                            .font(.headline)
+                        Text("Looks like you don’t have any projects saved!")
+                            .foregroundColor(.gray)
+                    }
                     .padding(.horizontal)
-                    .foregroundColor(Color.prim)
-                
-                HStack {
-                    DocumentButton(title: "Resume")
-                    DocumentButton(title: "Portfolio")
+                    
+                    // My Documents
+                    Text("My Documents")
+                        .font(.headline)
+                        .padding(.horizontal)
+                        .foregroundColor(Color.prim)
+                    
+                    HStack {
+                        DocumentButton(title: "Resume")
+                        DocumentButton(title: "Portfolio")
+                    }
+                    .padding(.horizontal)
+                    
+                    Spacer()
                 }
-                .padding(.horizontal)
-                
-                Spacer()
+                .toolbar {
+                    ToolbarItem {
+                        Button(action: {
+                            // TODO: go to settings page
+                        }) {
+                            Image(systemName: "gearshape.fill")
+                                .font(.title2)
+                                .foregroundColor(Color.prim)
+                        }
+                    }
+                }
+                .padding()
             }
-            .padding(.top, 20)
+            .navigationTitle("My Profile")
         }
     }
 }
