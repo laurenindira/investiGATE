@@ -23,10 +23,10 @@ struct DocumentButton: View {
                 VStack {
                     Text(title)
                         .bold()
-                        .foregroundColor(Color.darkblue)
+                        .foregroundColor(Color.prim)
                 }
                 .frame(width: 125, height: 125)
-                .background(Color.document)
+                .background(Color.surface)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             

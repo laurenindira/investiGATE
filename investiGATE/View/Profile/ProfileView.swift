@@ -28,7 +28,7 @@ struct ProfileView: View {
                     }) {
                         Image(systemName: "gearshape.fill")
                             .font(.title2)
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color.secondaryText)
                     }
                 }
                 .padding(.horizontal)
@@ -60,10 +60,10 @@ struct ProfileView: View {
                         Text(user.displayName)
                             .font(.title)
                             .bold()
-                            .foregroundColor(Color.darkblue)
+                            .foregroundColor(Color.prim)
                         
                         Text(user.majorDepartment.joined(separator: ", "))
-                            .foregroundColor(Color.lightblue)
+                            .foregroundColor(Color.sec)
                     }
                 }
                 .padding(.horizontal)
@@ -72,7 +72,7 @@ struct ProfileView: View {
                 Text("Research Interests")
                     .font(.headline)
                     .padding(.horizontal)
-                    .foregroundColor(Color.darkblue)
+                    .foregroundColor(Color.prim)
                 
                 if user.researchInterests.isEmpty {
                     Text("No research interests added yet.")
@@ -96,7 +96,7 @@ struct ProfileView: View {
                 Text("Current Projects")
                     .font(.headline)
                     .padding(.horizontal)
-                    .foregroundColor(Color.darkblue)
+                    .foregroundColor(Color.prim)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
@@ -111,7 +111,7 @@ struct ProfileView: View {
                 Text("Past Projects")
                     .font(.headline)
                     .padding(.horizontal)
-                    .foregroundColor(Color.darkblue)
+                    .foregroundColor(Color.prim)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
@@ -135,7 +135,7 @@ struct ProfileView: View {
                 Text("My Documents")
                     .font(.headline)
                     .padding(.horizontal)
-                    .foregroundColor(Color.darkblue)
+                    .foregroundColor(Color.prim)
                 
                 HStack {
                     DocumentButton(title: "Resume")
