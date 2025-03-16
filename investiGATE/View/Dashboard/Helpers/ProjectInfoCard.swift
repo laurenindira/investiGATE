@@ -54,5 +54,5 @@ struct ProjectInfoCard: View {
 }
 
 #Preview {
-    ProjectInfoCard(project: Project(id: "", title: "fake title one but longer for testing", departments: ["BIOL", "CMSI"], topics: ["math", "bugs"], projectLead: "Dr. Linda Loo", description: "this project is about", team: [], requirements: "", hiring: true, thumbnailURL: "https://snworksceo.imgix.net/ids/673119a2-05dd-4329-a9cc-9cc0f4496267.sized-1000x1000.png?w=1000"))
+    ProjectInfoCard(project: Project(id: "", title: "fake title one but longer for testing", departments: ["BIOL", "CMSI"], topics: ["math", "bugs"], projectLeadId: "3", projectLeadName: "Dr Linda Loo", description: "this project is about", team: [], requirements: "", hiring: true, thumbnailURL: "https://snworksceo.imgix.net/ids/673119a2-05dd-4329-a9cc-9cc0f4496267.sized-1000x1000.png?w=1000"))
 }
