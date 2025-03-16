@@ -74,7 +74,7 @@ struct ProfileView: View {
                             }
                             .padding()
                         }
-                        .frame(maxWidth: .infinity)
+                        .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
                         .background {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(Color.surface)
@@ -148,37 +148,6 @@ struct ProfileView: View {
 }
 
 
-let sampleUser = User(
-    id: "123",
-    displayName: "Sam Charger",
-    email: "sam.charger@email.com",
-    creationDate: Date(),
-    providerRef: "google",
-    isProfessor: false,
-    researchInterests: ["BIOL", "CMSI", "MATH", "PHYS", "MATH"],
-    majorDepartment: ["Computer Science", "English"],
-    bio: "Passionate about CS and literature, exploring research in AI and UX design.",
-    profilePicture: "https://picsum.photos/id/237/200/300",
-    gradDate: Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 15)),
-    currentYear: "Junior",
-    link: [
-        UserLinks(linkName: "LinkedIn", linkURL: "https://www.linkedin.com/in/samcharger"),
-        UserLinks(linkName: "GitHub", linkURL: "https://github.com/samcharger")
-    ]
-)
-
-let sampleProject = Project(
-    id: "1",
-    title: "GRNsight: Defining Gene Regulatory Networks",
-    departments: ["CMSI", "BIOL"],
-    topics: ["Genes", "Web Development"],
-    projectLead: "Dondi",
-    projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
-    team: ["1", "2"],
-    requirements: "Bio or CMSI major",
-    hiring: false
-)
-
-#Preview {
-    ProfileView(project: sampleProject, user: sampleUser)
-}
+//#Preview {
+//    ProfileView(project: sampleProject)
+//}
