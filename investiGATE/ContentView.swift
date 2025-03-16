@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var auth: AuthViewModel
     @EnvironmentObject var projectsService: Projects
+    
     @AppStorage("isSignedIn") var isSignedIn = false
     
     var body: some View {
@@ -24,9 +25,13 @@ struct ContentView: View {
                             Label("Dashboard", systemImage: "house")
                         }
                     
+                    AllProjectsView()
+                        .tabItem {
+                            Label("All Projects", systemImage: "list.bullet")
+                        }
                     ProjectCreationView()
                         .tabItem {
-                            Label("Project", systemImage: "house")
+                            Label("Project", systemImage: "plus")
                         }
                 }
             }
