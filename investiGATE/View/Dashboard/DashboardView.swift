@@ -55,7 +55,6 @@ struct DashboardView: View {
                     }
                     
                     //CURRENT PROJECTS
-                    
                     VStack(alignment: .leading) {
                         Text("What you're working on")
                             .font(.title3).bold()
@@ -78,7 +77,7 @@ struct DashboardView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink {
-                            //TODO: add Settings slash sign out place
+                            SettingsView()
                         } label: {
                             Image(systemName: "gear")
                         }
