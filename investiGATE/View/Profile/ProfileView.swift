@@ -15,14 +15,46 @@ struct ProfileView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 
+                HStack {
+                    Text("My Profile")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        // TODO: go to settings page
+                    }) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.title2)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .padding(.horizontal)
+                
                 // Profile Header
                 HStack {
-                    Image("profile pic")
-                        .resizable()
-                        .scaledToFill()
+                    if let profileURL = user.profilePicture, let url = URL(string: profileURL) {
+                        AsyncImage(url: url) { image in
+                            image.resizable()
+                                .scaledToFill()
+                        } placeholder: {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .foregroundColor(.gray)
+                        }
                         .frame(width: 80, height: 80)
                         .clipShape(Circle())
                         .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                    } else {
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                            .foregroundColor(.gray)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.gray, lineWidth: 2))
+                    }
                     
                     VStack(alignment: .leading) {
                         Text(user.displayName)
@@ -32,16 +64,6 @@ struct ProfileView: View {
                         
                         Text(user.majorDepartment.joined(separator: ", "))
                             .foregroundColor(Color.lightblue)
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        // TODO: settings page
-                    }) {
-                        Image(systemName: "gearshape.fill")
-                            .font(.title2)
-                            .foregroundColor(.gray)
                     }
                 }
                 .padding(.horizontal)
@@ -121,7 +143,7 @@ let sampleUser = User(
     researchInterests: ["Artificial Intelligence", "Human-Computer Interaction"],
     majorDepartment: ["Computer Science", "English"],
     bio: "Passionate about CS and literature, exploring research in AI and UX design.",
-    profilePicture: nil,
+    profilePicture: "https://picsum.photos/id/237/200/300",
     gradDate: Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 15)),
     currentYear: "Junior",
     link: [
