@@ -11,6 +11,7 @@ struct DashboardView: View {
     @State var recentProjects: [Project] = []
     @State var recommendedProjects: [Project] = []
     @State var currentProjects: [Project] = []
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -52,6 +53,7 @@ struct DashboardView: View {
                     }
                     .padding(.top)
                 }
+                .padding()
             }
             .padding()
         }
@@ -63,6 +65,26 @@ struct DashboardView: View {
     DashboardView(
         recentProjects: [
             Project(
+                id: "1",
+                title: "GRNsight: Defining Gene Regulatory Networks",
+                departments: ["CMSI", "BIOL"],
+                topics: ["Genes", "Web Development"],
+                projectLead: "Dondi",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
+                team: ["1", "2"],
+                requirements: "bio or cmsi major",
+                hiring: false
+            ), Project(
+                id: "1",
+                title: "GRNsight: Defining Gene Regulatory Networks",
+                departments: ["CMSI", "BIOL"],
+                topics: ["Genes", "Web Development"],
+                projectLead: "Dondi",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
+                team: ["1", "2"],
+                requirements: "bio or cmsi major",
+                hiring: false
+            ), Project(
                 id: "1",
                 title: "GRNsight: Defining Gene Regulatory Networks",
                 departments: ["CMSI", "BIOL"],
