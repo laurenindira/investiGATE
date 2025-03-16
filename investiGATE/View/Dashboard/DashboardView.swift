@@ -11,6 +11,7 @@ struct DashboardView: View {
     @State var recentProjects: [Project] = []
     @State var recommendedProjects: [Project] = []
     @State var currentProjects: [Project] = []
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -68,7 +69,7 @@ struct DashboardView: View {
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
                 projectLead: "Dondi",
-                projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
                 hiring: false
@@ -82,7 +83,7 @@ struct DashboardView: View {
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
                 projectLead: "Dondi",
-                projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
                 hiring: false
@@ -96,7 +97,7 @@ struct DashboardView: View {
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
                 projectLead: "Dondi",
-                projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
                 hiring: false

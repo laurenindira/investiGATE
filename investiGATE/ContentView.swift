@@ -18,9 +18,10 @@ struct ContentView: View {
                     .environmentObject(auth)
             } else {
                 TabView {
-                  DashboardView()
-                .tabItem {
-                    Label("Dashboard", systemImage: "house")
+                    DashboardView()
+                        .tabItem {
+                            Label("Dashboard", systemImage: "house")
+                        }
                 }
             }
         }
