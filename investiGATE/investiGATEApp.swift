@@ -18,6 +18,7 @@ struct investiGATEApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(AuthViewModel())
+                .environmentObject(Projects())
         }
     }
 }
