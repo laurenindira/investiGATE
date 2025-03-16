@@ -87,7 +87,7 @@ struct ProjectCreationView: View {
         
         Task {
             do {
-                try await projectsService.createProject(title: title, departments: departmentList, topics: topicList, description: description, team: [""], requirements: requirements, hiring: hiring)
+                try await projectsService.createProject(title: title, departments: departmentList, topics: topicList, description: description, team: [""], requirements: requirements, hiring: hiring, thumbnailURL: nil)
                 
                 resetFields()
             } catch {

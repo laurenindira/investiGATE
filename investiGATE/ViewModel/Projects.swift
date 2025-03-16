@@ -37,7 +37,7 @@ class Projects: ObservableObject {
         isLoading = false
     }
     
-    func createProject(title: String, departments: [String], topics: [String], description: String, team: [String], requirements: String, hiring: Bool) async throws {
+    func createProject(title: String, departments: [String], topics: [String], description: String, team: [String], requirements: String, hiring: Bool, thumbnailURL: String?) async throws {
         guard let userID = auth.user?.id else {
             self.errorMessage = "ERROR: user not logged in"
             print("ERROR: user not logged in")
@@ -63,7 +63,8 @@ class Projects: ObservableObject {
                 "description": description,
                 "team": team,
                 "requirements": requirements,
-                "hiring": hiring
+                "hiring": hiring,
+                "thumbnailURL": thumbnailURL ?? ""
           ])
         } catch {
           print("Error writing document: \(error)")
