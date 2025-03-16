@@ -32,7 +32,12 @@ struct SignInView: View {
                 Spacer()
                 
                 //LOGO
-                Text("this is a logo")
+                Image("investigate_wordmark")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: UIScreen.main.bounds.width * 0.8)
+                
+                Spacer()
                 
                 //FIELDS
                 VStack {
@@ -47,6 +52,8 @@ struct SignInView: View {
                     }
                 }
                 .padding(.bottom, 40)
+                
+                Spacer()
                 
                 //BUTTONS
                 Button {
