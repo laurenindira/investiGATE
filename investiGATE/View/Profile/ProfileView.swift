@@ -132,7 +132,7 @@ struct ProfileView: View {
                 .toolbar {
                     ToolbarItem {
                         Button(action: {
-                            // TODO: go to settings page
+                            SettingsView()
                         }) {
                             Image(systemName: "gearshape.fill")
                                 .font(.title2)
@@ -148,6 +148,3 @@ struct ProfileView: View {
 }
 
 
-//#Preview {
-//    ProfileView(project: sampleProject)
-//}

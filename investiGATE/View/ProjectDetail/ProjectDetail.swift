@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ProjectDetail: View {
     @EnvironmentObject var auth: AuthViewModel
-    @EnvironmentObject var projectVM: Projects
-    
     @State var project: Project
     
     @State private var isFavorited: Bool = false
@@ -89,20 +87,20 @@ struct ProjectDetail: View {
                 .padding(.horizontal)
                 
                 // Current Team
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Current Team")
-                        .font(.headline)
-                        .foregroundColor(Color.prim)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 15) {
-                            ForEach(getTeamMembers(for: project), id: \.id) { member in
-                                MemberCard(user: member)
-                            }
-                        }
-                    }
-                }
-                .padding(.horizontal)
+//                VStack(alignment: .leading, spacing: 10) {
+//                    Text("Current Team")
+//                        .font(.headline)
+//                        .foregroundColor(Color.prim)
+//                    
+//                    ScrollView(.horizontal, showsIndicators: false) {
+//                        HStack(spacing: 15) {
+//                            ForEach(project.team, id: \.id) { member in
+//                                MemberCard(user: member)
+//                            }
+//                        }
+//                    }
+//                }
+//                .padding(.horizontal)
                 
                 // Who We're Looking For
                 VStack(alignment: .leading, spacing: 10) {
@@ -129,29 +127,29 @@ struct ProjectDetail: View {
     }
     
     // functions
-    func getTeamMembers(for project: Project) -> [User] {
-        return sampleUser.filter { project.team.contains($0.id) }
-    }
+//    func getTeamMembers(for project: Project) -> [User] {
+//        return sampleUser.filter { project.team.contains($0.id) }
+//    }
 }
 
 //TODO: add actual fetching froom database
-let sampleUser: [User] = [
-        User(id: "1", displayName: "Alice Johnson", email: "alice@email.com",
-             creationDate: Date(), providerRef: "google", isProfessor: false,
-             researchInterests: ["AI", "Bioinformatics"], majorDepartment: ["CMSI", "BIOL"],
-             bio: "Bioinformatics enthusiast.", profilePicture: nil, gradDate: nil, currentYear: "Senior",
-             link: []),
-        User(id: "2", displayName: "Bob Smith", email: "bob@email.com",
-             creationDate: Date(), providerRef: "email", isProfessor: false,
-             researchInterests: ["HCI", "ML"], majorDepartment: ["CS"],
-             bio: "Passionate about machine learning.", profilePicture: nil, gradDate: nil, currentYear: "Junior",
-             link: []),
-        User(id: "3", displayName: "Charlie Davis", email: "charlie@email.com",
-             creationDate: Date(), providerRef: "google", isProfessor: false,
-             researchInterests: ["Cybersecurity"], majorDepartment: ["CS"],
-             bio: "Exploring security in AI applications.", profilePicture: nil, gradDate: nil, currentYear: "Senior",
-             link: [])
-    ]
+//let sampleUser: [User] = [
+//        User(id: "1", displayName: "Alice Johnson", email: "alice@email.com",
+//             creationDate: Date(), providerRef: "google", isProfessor: false,
+//             researchInterests: ["AI", "Bioinformatics"], majorDepartment: ["CMSI", "BIOL"],
+//             bio: "Bioinformatics enthusiast.", profilePicture: nil, gradDate: nil, currentYear: "Senior",
+//             link: []),
+//        User(id: "2", displayName: "Bob Smith", email: "bob@email.com",
+//             creationDate: Date(), providerRef: "email", isProfessor: false,
+//             researchInterests: ["HCI", "ML"], majorDepartment: ["CS"],
+//             bio: "Passionate about machine learning.", profilePicture: nil, gradDate: nil, currentYear: "Junior",
+//             link: []),
+//        User(id: "3", displayName: "Charlie Davis", email: "charlie@email.com",
+//             creationDate: Date(), providerRef: "google", isProfessor: false,
+//             researchInterests: ["Cybersecurity"], majorDepartment: ["CS"],
+//             bio: "Exploring security in AI applications.", profilePicture: nil, gradDate: nil, currentYear: "Senior",
+//             link: [])
+//    ]
 
 let sampleProject = Project(
     id: "1",
@@ -170,5 +168,4 @@ let sampleProject = Project(
     ProjectDetail(project: sampleProject)
         .environmentObject(AuthViewModel())
         .environmentObject(Projects())
-    
 }
