@@ -50,23 +50,26 @@ class Projects: ObservableObject {
             return
         }
         
-        
+        let id = UUID().uuidString
         // TODO: ADD PROJECT ID
         do {
-            try await db.collection(ALL_PROJECT_COLLECTION_NAME).document(userID).collection(PROJECT_COLLECTION_NAME).addDocument(data: [
-            "title": title,
-            "departments": departments,
-            "topics": topics,
-            "projectLeadId": userID,
-            "projectLeadName": userDisplayName,
-            "description": description,
-            "team": team,
-            "requirements": requirements,
-            "hiring": hiring
+            try await db.collection(ALL_PROJECT_COLLECTION_NAME).document(userID).collection(PROJECT_COLLECTION_NAME).document(id).setData([
+                "id": id,
+                "title": title,
+                "departments": departments,
+                "topics": topics,
+                "projectLeadId": userID,
+                "projectLeadName": userDisplayName,
+                "description": description,
+                "team": team,
+                "requirements": requirements,
+                "hiring": hiring
           ])
         } catch {
           print("Error writing document: \(error)")
         }
+        
+        
     }
 
     @MainActor
