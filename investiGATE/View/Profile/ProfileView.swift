@@ -59,19 +59,25 @@ struct ProfileView: View {
                     
                     if user.researchInterests.isEmpty {
                         Text("No research interests added yet.")
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color.prim)
+                            .background {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color.surface.opacity(0.2))
+                            }
                             .padding(.horizontal)
                     } else {
-                        FlowLayout(spacing: 10) {
-                            ForEach(user.researchInterests, id: \.self) { interest in
-                                Tag(keyword: interest)
+                        VStack {
+                            FlowLayout(spacing: 10) {
+                                ForEach(user.researchInterests, id: \.self) { interest in
+                                    Tag(keyword: interest)
+                                }
                             }
+                            .padding()
                         }
-                        .padding()
+                        .frame(maxWidth: .infinity)
                         .background {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(Color.surface)
-                                .frame(width: UIScreen.main.bounds.width)
                         }
                     }
                     
