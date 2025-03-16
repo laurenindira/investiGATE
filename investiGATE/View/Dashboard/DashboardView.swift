@@ -33,7 +33,7 @@ struct DashboardView: View {
                             .padding(.bottom, -10)
                         
                         // TODO: switch this out for recentProjects
-                        CarouselView(featuredProjects: recommendedProjects)
+                        CarouselView(featuredProjects: recentProjects)
                     }
                     
                     VStack(alignment: .leading) {
@@ -55,23 +55,23 @@ struct DashboardView: View {
                     }
                     
                     //CURRENT PROJECTS
-                    VStack(alignment: .leading) {
-                        Text("What you're working on")
-                            .font(.title3).bold()
-                            .foregroundStyle(Color.prim)
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(currentProjects, id: \.self) { project in
-                                    NavigationLink {
-                                        //TODO: ADD DETAIL PAGE
-                                    } label: {
-                                        ProjectInfoCard(project: project)
-                                    }
-                                }
-                            }
-                        }
-                        .scrollIndicators(.hidden)
-                    }
+//                    VStack(alignment: .leading) {
+//                        Text("What you're working on")
+//                            .font(.title3).bold()
+//                            .foregroundStyle(Color.prim)
+//                        ScrollView(.horizontal) {
+//                            HStack {
+//                                ForEach(currentProjects, id: \.self) { project in
+//                                    NavigationLink {
+//                                        ProjectDetail(project: project)
+//                                    } label: {
+//                                        ProjectInfoCard(project: project)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        .scrollIndicators(.hidden)
+//                    }
                 }
                 .padding()
                 .toolbar {
@@ -89,10 +89,19 @@ struct DashboardView: View {
         .task {
             await projectsService.fetchProjects()
             
+            
             if let user = auth.user {
+                do {
+                    let fiveProjects = try await projectsService.fetchAllProjects()
+                    recentProjects = Array(fiveProjects
+                        .filter { $0.departments.contains(user.majorDepartment) }
+                        .prefix(5))
+                } catch {
+                    print("error in dashboardView")
+                }
                 
                 // limit recent projects by 5 most recent projects from allprojects
-                //recentProjects = projectsService.projects.filter{ $0.departments.contains(user.majorDepartment) }
+                
                 recommendedProjects = projectsService.projects.filter{ $0.departments.contains(user.majorDepartment) }
                 //currentProjects =
                 print("got projects back?", projectsService.projects)

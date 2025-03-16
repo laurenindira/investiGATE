@@ -167,18 +167,17 @@ let sampleUser = User(
     ]
 )
 
-let sampleProject = Project(
-    id: "1",
-    title: "GRNsight: Defining Gene Regulatory Networks",
-    departments: ["CMSI", "BIOL"],
-    topics: ["Genes", "Web Development"],
-    projectLead: "Dondi",
-    projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
-    team: ["1", "2"],
-    requirements: "Bio or CMSI major",
-    hiring: false
-)
-
 #Preview {
-    ProfileView(project: sampleProject, user: sampleUser)
+    ProfileView(project: Project(
+        id: "1",
+        title: "GRNsight: Defining Gene Regulatory Networks",
+        departments: ["CMSI", "BIOL"],
+        topics: ["Genes", "Web Development"],
+        projectLeadId: "1",
+        projectLeadName: "Dondi",
+        description: "Modeling gene regulatory networks and protein-protein interactions.",
+        team: ["1", "2"],
+        requirements: "Bio or CMSI major",
+        hiring: false
+    ), user: sampleUser)
 }
