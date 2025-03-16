@@ -8,17 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var auth: AuthViewModel
+    @EnvironmentObject var projectsService: Projects
+    @AppStorage("isSignedIn") var isSignedIn = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Group {
+            if !isSignedIn {
+                SplashView()
+                    .environmentObject(auth)
+            } else {
+                TabView {
+                    DashboardView()
+                        .tabItem {
+                            Label("Dashboard", systemImage: "house")
+                        }
+                    
+                    ProjectCreationView()
+                        .tabItem {
+                            Label("Project", systemImage: "house")
+                        }
+                }
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AuthViewModel())
+        .environmentObject(Projects())
 }

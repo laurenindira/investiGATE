@@ -13,6 +13,8 @@ import GoogleSignIn
 
 @Observable
 class AuthViewModel: NSObject, ObservableObject {
+    static var shared = AuthViewModel()
+    
     var user: User? {
         didSet {
             if let currentUser = user {
@@ -130,7 +132,7 @@ class AuthViewModel: NSObject, ObservableObject {
                             }
                         }
                     } else {
-                        let newUser = User(id: uid, displayName: fullName, email: tempUser.email, creationDate: Date(), providerRef: "google", isProfessor: tempUser.isProfessor, researchInterests: tempUser.researchInterests, majorDepartment: tempUser.majorDepartment, bio: "", profilePicture: "", gradDate: tempUser.gradDate ?? nil, currentYear: tempUser.currentYear ?? nil, link: [])
+                        let newUser = User(id: uid, displayName: fullName, email: email, creationDate: Date(), providerRef: "google", isProfessor: tempUser.isProfessor, researchInterests: tempUser.researchInterests, majorDepartment: tempUser.majorDepartment, bio: "", profilePicture: "", gradDate: tempUser.gradDate ?? nil, currentYear: tempUser.currentYear ?? nil, link: [])
                       
                         Task {
                             do {
@@ -163,10 +165,10 @@ class AuthViewModel: NSObject, ObservableObject {
                 "isProfessor": user.isProfessor,
                 "reserchInterests": user.researchInterests,
                 "majorDepartment": user.majorDepartment,
-                "bio": user.bio,
-                "profilePicture": user.profilePicture,
+                "bio": user.bio ?? "",
+                "profilePicture": user.profilePicture ?? "",
                 "gradDate": Timestamp(date: user.gradDate ?? Date()),
-                "currentYear": user.currentYear,
+                "currentYear": user.currentYear ?? "",
                 "link": user.link
             ])
         } catch let error as NSError {
