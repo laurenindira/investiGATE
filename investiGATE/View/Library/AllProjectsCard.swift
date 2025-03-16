@@ -11,7 +11,7 @@ struct AllProjectsCard: View {
     var project: Project
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             //TITLE
             Text(project.title)
                 .font(.title2).bold()
@@ -69,7 +69,12 @@ struct AllProjectsCard: View {
             }
             
             //PROJECT LEAD
-            
+            HStack {
+                Image(systemName: "figure.wave")
+                Text("Project Lead: ")
+                    .bold()
+                Text(project.projectLeadName)
+            }
         }
         .padding()
         .frame(width: UIScreen.main.bounds.width * 0.9)

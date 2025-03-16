@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ProjectDetail: View {
+    @EnvironmentObject var auth: AuthViewModel
+    @EnvironmentObject var projectVM: Projects
+    
     @State var project: Project
-    @State var user: User
     
     @State private var isFavorited: Bool = false
     
@@ -17,25 +19,25 @@ struct ProjectDetail: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 
-                // Back Button
-                HStack {
-                    Button(action: {
-                        // TODO: back navigation
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.title2)
-                            .foregroundColor(.black)
-                    }
-                    Spacer()
-                    
-                    Button(action: {
-                        isFavorited.toggle()
-                    }) {
-                        Image(systemName: isFavorited ? "star.fill" : "star")
-                            .foregroundColor(isFavorited ? .yellow : .black)
-                    }
-                }
-                .padding(.horizontal)
+//                // Back Button
+//                HStack {
+//                    Button(action: {
+//                        // TODO: back navigation
+//                    }) {
+//                        Image(systemName: "chevron.left")
+//                            .font(.title2)
+//                            .foregroundColor(.black)
+//                    }
+//                    Spacer()
+//                    
+//                    Button(action: {
+//                        isFavorited.toggle()
+//                    }) {
+//                        Image(systemName: isFavorited ? "star.fill" : "star")
+//                            .foregroundColor(isFavorited ? .yellow : .black)
+//                    }
+//                }
+//                .padding(.horizontal)
                 
                 // Project Title & Department
                 VStack(alignment: .leading, spacing: 5) {
@@ -165,5 +167,8 @@ let sampleProject = Project(
 )
 
 #Preview {
-    ProjectDetail(project: sampleProject, user: sampleUser.first!)
+    ProjectDetail(project: sampleProject)
+        .environmentObject(AuthViewModel())
+        .environmentObject(Projects())
+    
 }
