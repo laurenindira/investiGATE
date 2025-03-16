@@ -51,9 +51,9 @@ struct CarouselView: View {
 
 #Preview {
     CarouselView(featuredProjects: [
-        Project(id: "", title: "fake title one", departments: ["BIOL", "CMSI"], topics: ["math", "bugs"], projectLead: "Dr. Linda Loo", description: "this project is about", team: [], requirements: "", hiring: true),
-        Project(id: "", title: "fake title two", departments: ["BIOL", "CMSI"], topics: ["math", "bugs"], projectLead: "Dr. Linda Loo", description: "this project is about", team: [], requirements: "", hiring: true),
-        Project(id: "", title: "fake title three", departments: ["BIOL", "CMSI"], topics: ["math", "bugs"], projectLead: "Dr. Linda Loo", description: "this project is about", team: [], requirements: "", hiring: true)
+        Project(id: "", title: "fake title one", departments: ["BIOL", "CMSI"], topics: ["math", "bugs"], projectLead: "Dr. Linda Loo", description: "this project is about", team: [], requirements: "", hiring: true, thumbnailURL: "https://snworksceo.imgix.net/ids/673119a2-05dd-4329-a9cc-9cc0f4496267.sized-1000x1000.png?w=1000"),
+        Project(id: "", title: "fake title two", departments: ["BIOL", "CMSI"], topics: ["math", "bugs"], projectLead: "Dr. Linda Loo", description: "this project is about", team: [], requirements: "", hiring: true, thumbnailURL: "https://snworksceo.imgix.net/ids/673119a2-05dd-4329-a9cc-9cc0f4496267.sized-1000x1000.png?w=1000"),
+        Project(id: "", title: "fake title three", departments: ["BIOL", "CMSI"], topics: ["math", "bugs"], projectLead: "Dr. Linda Loo", description: "this project is about", team: [], requirements: "", hiring: true, thumbnailURL: "https://snworksceo.imgix.net/ids/673119a2-05dd-4329-a9cc-9cc0f4496267.sized-1000x1000.png?w=1000")
     ])
         .environment(AuthViewModel())
 }

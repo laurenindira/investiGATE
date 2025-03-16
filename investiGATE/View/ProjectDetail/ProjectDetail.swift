@@ -66,8 +66,8 @@ struct ProjectDetail: View {
                         .frame(width: 40, height: 40)
                         .foregroundColor(.gray)
                     
-                    Text("**Project Lead:** \(project.projectLead)")
-                        .font(.body)
+//                    Text("**Project Lead:** \(project.projectLead)")
+//                        .font(.body)
                 }
                 .padding(.horizontal)
                 
@@ -156,7 +156,8 @@ let sampleProject = Project(
     title: "GRNsight: Defining Gene Regulatory Networks",
     departments: ["CMSI", "BIOL"],
     topics: ["Hiring", "Not hiring"],
-    projectLead: "Dondi",
+    projectLeadId: "1",
+    projectLeadName: "Dondi",
     description: "Lorem ipsum odor amet, consectetuer adipiscing elit. Risus hac etiam enim placerat; rhoncus morbi sapien. Dictum laoreet dui sem malesuada ante. Amet elementum tempor per maecenas commodo. Primis at praesent est potenti ridiculus torquent. Tempor ante lobortis; fames placerat rutrum mi natoque. Venenatis malesuada id a cursus dictumst iaculis. Condimentum iaculis ac maecenas fringilla velit litora convallis natoque. Consequat felis dui fusce viverra blandit finibus.",
     team: ["1", "2", "3"],
     requirements: "Bio or CMSI major with interest in computational biology.",
