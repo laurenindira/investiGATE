@@ -39,8 +39,14 @@ class Projects: ObservableObject {
     }
     
     func createProject(id: String, title: String, departments: [String], topics: [String], projectLead: String, description: String, team: [String], requirements: String, hiring: Bool) async {
+        guard let userID = auth.user?.id else {
+            self.errorMessage = "ERROR: user not logged in"
+            print("ERROR: user not logged in")
+            return
+        }
+        
         do {
-          try await db.collection("cities").document("LA").setData([
+            try await db.collection(ALL_PROJECT_COLLECTION_NAME).document(userID).collection(PROJECT_COLLECTION_NAME).addDocument(data: [
             "id": id,
             "title": title,
             "departments": departments,
