@@ -28,7 +28,7 @@ struct ProfileView: View {
                     }) {
                         Image(systemName: "gearshape.fill")
                             .font(.title2)
-                            .foregroundColor(Color.secondaryText)
+                            .foregroundColor(Color.prim)
                     }
                 }
                 .padding(.horizontal)
@@ -79,14 +79,13 @@ struct ProfileView: View {
                         .foregroundColor(.gray)
                         .padding(.horizontal)
                 } else {
-                    VStack(alignment: .leading, spacing: 10) {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))], spacing: 10) {
-                            ForEach(user.researchInterests, id: \.self) { interest in
-                                Tag(keyword: interest)
-                            }
+                    FlowLayout(spacing: 10) {
+                        ForEach(user.researchInterests, id: \.self) { interest in
+                            Tag(keyword: interest)
                         }
                     }
                     .padding()
+                    .frame(maxWidth: .infinity)
                     .background(Color.surface)
                     .cornerRadius(10)
                     .padding(.horizontal)
@@ -158,7 +157,7 @@ let sampleUser = User(
     creationDate: Date(),
     providerRef: "google",
     isProfessor: false,
-    researchInterests: ["Artificial Intelligence", "Human-Computer Interaction"],
+    researchInterests: ["BIOL", "CMSI", "MATH", "PHYS", "MATH"],
     majorDepartment: ["Computer Science", "English"],
     bio: "Passionate about CS and literature, exploring research in AI and UX design.",
     profilePicture: "https://picsum.photos/id/237/200/300",
