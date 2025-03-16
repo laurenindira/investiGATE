@@ -13,7 +13,6 @@ let ALL_PROJECT_COLLECTION_NAME = "allProjects"
 
 enum ProjectServiceError: Error {
     case mismatchedDocumentError
-    
     case userNotLoggedIn
     case unexpectedError
 }
@@ -38,20 +37,28 @@ class Projects: ObservableObject {
         isLoading = false
     }
     
-    func createProject(id: String, title: String, departments: [String], topics: [String], projectLead: String, description: String, team: [String], requirements: String, hiring: Bool) async {
+    func createProject(title: String, departments: [String], topics: [String], description: String, team: [String], requirements: String, hiring: Bool) async throws {
         guard let userID = auth.user?.id else {
             self.errorMessage = "ERROR: user not logged in"
             print("ERROR: user not logged in")
             return
         }
         
+        guard let userDisplayName = auth.user?.displayName else {
+            self.errorMessage = "ERROR: user not logged in"
+            print("ERROR: user not logged in")
+            return
+        }
+        
+        
+        // TODO: ADD PROJECT ID
         do {
             try await db.collection(ALL_PROJECT_COLLECTION_NAME).document(userID).collection(PROJECT_COLLECTION_NAME).addDocument(data: [
-            "id": id,
             "title": title,
             "departments": departments,
             "topics": topics,
-            "projectLead": projectLead,
+            "projectLeadId": userID,
+            "projectLeadName": userDisplayName,
             "description": description,
             "team": team,
             "requirements": requirements,
@@ -95,6 +102,7 @@ class Projects: ObservableObject {
                     project.id = document.documentID
                     return project
                 } catch {
+                    print("MISMATCHED DOCUMENTS")
                     throw ProjectServiceError.mismatchedDocumentError
                 }
             }

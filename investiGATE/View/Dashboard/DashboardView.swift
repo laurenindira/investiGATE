@@ -51,6 +51,7 @@ struct DashboardView: View {
                     }
                     .padding(.top)
                 }
+                .padding()
             }
             .padding()
         }
@@ -70,7 +71,8 @@ struct DashboardView: View {
                 title: "GRNsight: Defining Gene Regulatory Networks",
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
-                projectLead: "Dondi",
+                projectLeadId: "1",
+                projectLeadName: "Dondi",
                 description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
@@ -84,7 +86,8 @@ struct DashboardView: View {
                 title: "GRNsight: Defining Gene Regulatory Networks",
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
-                projectLead: "Dondi",
+                projectLeadId: "1",
+                projectLeadName: "Dondi",
                 description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
@@ -98,7 +101,8 @@ struct DashboardView: View {
                 title: "GRNsight: Defining Gene Regulatory Networks",
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
-                projectLead: "Dondi",
+                projectLeadId: "1",
+                projectLeadName: "Dondi",
                 description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",

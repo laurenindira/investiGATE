@@ -23,6 +23,11 @@ struct ContentView: View {
                         .tabItem {
                             Label("Dashboard", systemImage: "house")
                         }
+                    
+                    ProjectCreationView()
+                        .tabItem {
+                            Label("Project", systemImage: "house")
+                        }
                 }
             }
         }
