@@ -32,7 +32,8 @@ struct DashboardView: View {
                             .foregroundStyle(Color.prim)
                             .padding(.bottom, -10)
                         
-                        CarouselView(featuredProjects: recentProjects)
+                        // TODO: switch this out for recentProjects
+                        CarouselView(featuredProjects: recommendedProjects)
                     }
                     
                     VStack(alignment: .leading) {
