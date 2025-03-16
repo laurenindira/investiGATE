@@ -10,10 +10,11 @@ import SwiftUIInfiniteCarousel
 
 struct DashboardView: View {
     @EnvironmentObject var projectsService: Projects
+    @EnvironmentObject var auth: AuthViewModel
     @State var recentProjects: [Project] = []
     @State var recommendedProjects: [Project] = []
     @State var currentProjects: [Project] = []
-
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -31,6 +32,7 @@ struct DashboardView: View {
                             .foregroundStyle(Color.prim)
                             .padding(.bottom, -10)
                         
+                        // TODO: switch this out for recentProjects
                         CarouselView(featuredProjects: recentProjects)
                     }
                     
@@ -42,7 +44,7 @@ struct DashboardView: View {
                             HStack {
                                 ForEach(recommendedProjects, id: \.self) { project in
                                     NavigationLink {
-                                        //TODO: ADD DETAIL PAGE
+                                        ProjectDetail(project: project)
                                     } label: {
                                         ProjectInfoCard(project: project)
                                     }
@@ -51,25 +53,25 @@ struct DashboardView: View {
                         }
                         .scrollIndicators(.hidden)
                     }
-                  
+                    
                     //CURRENT PROJECTS
-                    VStack(alignment: .leading) {
-                        Text("What you're working on")
-                            .font(.title3).bold()
-                            .foregroundStyle(Color.prim)
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(currentProjects, id: \.self) { project in
-                                    NavigationLink {
-                                        //TODO: ADD DETAIL PAGE
-                                    } label: {
-                                        ProjectInfoCard(project: project)
-                                    }
-                                }
-                            }
-                        }
-                        .scrollIndicators(.hidden)
-                    }
+//                    VStack(alignment: .leading) {
+//                        Text("What you're working on")
+//                            .font(.title3).bold()
+//                            .foregroundStyle(Color.prim)
+//                        ScrollView(.horizontal) {
+//                            HStack {
+//                                ForEach(currentProjects, id: \.self) { project in
+//                                    NavigationLink {
+//                                        ProjectDetail(project: project)
+//                                    } label: {
+//                                        ProjectInfoCard(project: project)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        .scrollIndicators(.hidden)
+//                    }
                 }
                 .padding()
                 .toolbar {
@@ -87,7 +89,27 @@ struct DashboardView: View {
         .task {
             await projectsService.fetchProjects()
             
-            print("got projects back?", projectsService.projects)
+            
+            if let user = auth.user {
+                do {
+                    let fiveProjects = try await projectsService.fetchAllProjects()
+                    recentProjects = Array(fiveProjects
+                        .filter { $0.departments.contains(user.majorDepartment) }
+                        .prefix(5))
+                } catch {
+                    print("error in dashboardView")
+                }
+                
+                // limit recent projects by 5 most recent projects from allprojects
+                
+                recommendedProjects = projectsService.projects.filter{ $0.departments.contains(user.majorDepartment) }
+                //currentProjects =
+                print("got projects back?", projectsService.projects)
+            } else {
+                print("ERROR: user not logged in")
+            }
+            
+            
         }
     }
 }
@@ -142,4 +164,5 @@ struct DashboardView: View {
         ]
     )
     .environmentObject(Projects())
+    .environmentObject(AuthViewModel())
 }
