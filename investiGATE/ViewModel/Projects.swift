@@ -21,6 +21,7 @@ enum ProjectServiceError: Error {
 class Projects: ObservableObject {
     static var shared = Projects()
     @Published var projects: [Project]
+    @Published var allProjects: [Project]
     
     var isLoading: Bool
     var errorMessage: String = ""
@@ -33,6 +34,7 @@ class Projects: ObservableObject {
     
     init() {
         projects = [Project]()
+        allProjects = [Project]()
         maxProjectCount = 0
         isLoading = false
     }
@@ -69,8 +71,6 @@ class Projects: ObservableObject {
         } catch {
           print("Error writing document: \(error)")
         }
-        
-        
     }
 
     @MainActor
@@ -92,6 +92,32 @@ class Projects: ObservableObject {
         }
 
         self.isLoading = false
+    }
+    
+    func fetchAllProjects() async throws -> [Project] {
+        self.isLoading = true
+        
+        do {
+            let querySnapshot = try await db.collectionGroup(PROJECT_COLLECTION_NAME).getDocuments()
+            let projects = try querySnapshot.documents.compactMap { document in
+                do {
+                    var project = try document.data(as: Project.self)
+                    project.id = document.documentID
+                    return project
+                } catch {
+                    print("MISMATCHED DOCUMENTS")
+                    throw ProjectServiceError.mismatchedDocumentError
+                }
+            }
+            
+            self.isLoading = false
+            return projects
+            
+        } catch {
+            self.errorMessage = error.localizedDescription
+            print("ERROR: Failed to fetch projects - \(self.errorMessage)")
+            return []
+        }
     }
     
     
