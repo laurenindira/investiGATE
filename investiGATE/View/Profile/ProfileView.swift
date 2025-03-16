@@ -74,6 +74,24 @@ struct ProfileView: View {
                     .padding(.horizontal)
                     .foregroundColor(Color.darkblue)
                 
+                if user.researchInterests.isEmpty {
+                    Text("No research interests added yet.")
+                        .foregroundColor(.gray)
+                        .padding(.horizontal)
+                } else {
+                    VStack(alignment: .leading, spacing: 10) {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))], spacing: 10) {
+                            ForEach(user.researchInterests, id: \.self) { interest in
+                                Tag(keyword: interest)
+                            }
+                        }
+                    }
+                    .padding()
+                    .background(Color.surface)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                }
+                
                 // Current Projects
                 Text("Current Projects")
                     .font(.headline)
