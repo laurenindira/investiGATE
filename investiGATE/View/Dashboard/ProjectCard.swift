@@ -12,7 +12,7 @@ struct ProjectCard: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image(systemName: "Home")
+            Image(systemName: "House")
             
             Text("GRNsight: Defining Gene Regulatory Networks")
                 .font(.body)
@@ -20,7 +20,7 @@ struct ProjectCard: View {
                 .frame(maxWidth: 140)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Image(systemName: "Home")
+            Image(systemName: "House")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 150, height: 150)
@@ -49,7 +49,7 @@ struct ProjectCard: View {
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
                 projectLead: "Dondi",
-                projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
                 hiring: false

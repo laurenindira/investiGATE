@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var auth: AuthViewModel
+    @EnvironmentObject var projectsService: Projects
     @AppStorage("isSignedIn") var isSignedIn = false
     
     var body: some View {
@@ -18,9 +19,10 @@ struct ContentView: View {
                     .environmentObject(auth)
             } else {
                 TabView {
-                  DashboardView()
-                .tabItem {
-                    Label("Dashboard", systemImage: "house")
+                    DashboardView()
+                        .tabItem {
+                            Label("Dashboard", systemImage: "house")
+                        }
                 }
             }
         }
@@ -30,4 +32,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environmentObject(AuthViewModel())
+        .environmentObject(Projects())
 }

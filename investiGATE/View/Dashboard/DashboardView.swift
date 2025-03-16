@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @EnvironmentObject var projectsService: Projects
     @State var recentProjects: [Project] = []
     @State var recommendedProjects: [Project] = []
     @State var currentProjects: [Project] = []
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -19,14 +21,13 @@ struct DashboardView: View {
                         Text("Fresh out the gate")
                             
                         HStack {
-                            ForEach(recentProjects, id: \.self) { project in
+                            ForEach(projectsService.projects, id: \.self) { project in
                                 ProjectCard(project: project)
                             }
                             Spacer()
                         }
                     }
                     
-
                     VStack(alignment: .leading) {
                         Text("These might spark your interest")
                         HStack {
@@ -37,8 +38,6 @@ struct DashboardView: View {
                         }
                     }
                     .padding(.top)
-                    
-                    
                     
                     VStack(alignment: .leading) {
                         Text("What you're working on")
@@ -55,7 +54,11 @@ struct DashboardView: View {
             }
             .padding()
         }
-        
+        .task {
+            await projectsService.fetchProjects()
+            
+            print("got projects back?", projectsService.projects)
+        }
     }
 }
 
@@ -68,7 +71,7 @@ struct DashboardView: View {
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
                 projectLead: "Dondi",
-                projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
                 hiring: false
@@ -82,7 +85,7 @@ struct DashboardView: View {
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
                 projectLead: "Dondi",
-                projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
                 hiring: false
@@ -96,11 +99,12 @@ struct DashboardView: View {
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
                 projectLead: "Dondi",
-                projectDescription: "Modeling gene regulatory networks and protein-protein interactions.",
+                description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
                 hiring: false
             )
         ]
     )
+    .environmentObject(Projects())
 }
