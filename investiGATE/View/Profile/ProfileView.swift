@@ -115,7 +115,7 @@ struct ProfileView: View {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("Saved Projects")
                             .font(.headline)
-                        Text("Looks like you don’t have any projects saved!")
+                        Text("You don’t have any projects saved!")
                             .foregroundColor(.gray)
                     }
                     .padding(.horizontal)
