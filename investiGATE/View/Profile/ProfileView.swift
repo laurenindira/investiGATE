@@ -53,7 +53,7 @@ struct ProfileView: View {
                     
                     // Research Interests
                     Text("Research Interests")
-                        .font(.headline)
+                        .font(.title3)
                         .padding(.horizontal)
                         .foregroundColor(Color.prim)
                     
@@ -83,7 +83,7 @@ struct ProfileView: View {
                     
                     // Current Projects
                     Text("Current Projects")
-                        .font(.headline)
+                        .font(.title3)
                         .padding(.horizontal)
                         .foregroundColor(Color.prim)
                     
@@ -98,7 +98,7 @@ struct ProfileView: View {
                     
                     // Past Projects
                     Text("Past Projects")
-                        .font(.headline)
+                        .font(.title3)
                         .padding(.horizontal)
                         .foregroundColor(Color.prim)
                     
@@ -114,7 +114,8 @@ struct ProfileView: View {
                     // Saved Projects
                     VStack(alignment: .leading, spacing: 5) {
                         Text("Saved Projects")
-                            .font(.headline)
+                            .foregroundColor(Color.prim)
+                            .font(.title3)
                         Text("You don’t have any projects saved!")
                             .foregroundColor(.gray)
                     }

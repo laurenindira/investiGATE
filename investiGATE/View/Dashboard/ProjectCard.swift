@@ -14,7 +14,7 @@ struct ProjectCard: View {
         VStack(alignment: .leading) {
             Image(systemName: "Home")
             
-            Text("GRNsight: Defining Gene Regulatory Networks")
+            Text(project.title)
                 .font(.body)
                 .lineLimit(3)
                 .frame(maxWidth: 140)
