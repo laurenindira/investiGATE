@@ -18,5 +18,4 @@ struct Project: Identifiable, Codable, Hashable {
     var team: [String] // list of userIds
     var requirements: String // requirements for someone to join research team
     var hiring: Bool
-    var thumbnailImage: String? //link to cover image
 }

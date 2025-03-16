@@ -1,5 +1,5 @@
 {
-  "originHash" : "fc056ca7916ed818ce8cf28eaf37caf5bd27786a890a91807960ad4069819601",
+  "originHash" : "f09d161e51b044eeb1d3db26833f3277320a27b91d53f5eb06dc0360383fe1f4",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -143,6 +143,15 @@
       "state" : {
         "revision" : "d72aed98f8253ec1aa9ea1141e28150f408cf17f",
         "version" : "1.29.0"
+      }
+    },
+    {
+      "identity" : "swiftuiinfinitecarousel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dancarvajc/SwiftUIInfiniteCarousel.git",
+      "state" : {
+        "revision" : "0ad2cd4c116e6683d8255f68e3c713f1be8f9e5a",
+        "version" : "1.2.1"
       }
     }
   ],

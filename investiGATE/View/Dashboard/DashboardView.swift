@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIInfiniteCarousel
 
 struct DashboardView: View {
     @State var recentProjects: [Project] = []
@@ -15,21 +16,25 @@ struct DashboardView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 10) {
+                    //LOGO
+                    Image("investigate_wordmark")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width * 0.6)
+                    
+                    //CAROUSEL
+                    VStack(alignment: .leading, spacing: 5) {
                         Text("Fresh out the gate")
-                            
-                        HStack {
-                            ForEach(recentProjects, id: \.self) { project in
-                                ProjectCard(project: project)
-                            }
-                            Spacer()
-                        }
+                            .font(.title3).bold()
+                            .foregroundStyle(Color.prim)
+                        
+                        CarouselView(featuredProjects: recentProjects)
                     }
                     
-
+                    //RECOMMNEDED PROJECTS
                     VStack(alignment: .leading) {
-                        Text("These might spark your interest")
+                        Text("These might spark your interest...")
                         HStack {
                             ForEach(recommendedProjects, id: \.self) { project in
                                 ProjectCard(project: project)
@@ -51,12 +56,10 @@ struct DashboardView: View {
                         }
                         
                     }
-                    .padding(.top)
                 }
+                .padding()
             }
-            .padding()
         }
-        
     }
 }
 
