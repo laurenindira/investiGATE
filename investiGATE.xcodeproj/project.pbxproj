@@ -14,6 +14,7 @@
 		A5867D5C2D85F42A00AF3470 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A5867D5B2D85F42A00AF3470 /* FirebaseStorage */; };
 		A5867D5F2D85F45000AF3470 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A5867D5E2D85F45000AF3470 /* GoogleSignIn */; };
 		A5867D612D85F45000AF3470 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A5867D602D85F45000AF3470 /* GoogleSignInSwift */; };
+		A5867EB42D864F1B00AF3470 /* SwiftUIInfiniteCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = A5867EB32D864F1B00AF3470 /* SwiftUIInfiniteCarousel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 				A5867D562D85F42A00AF3470 /* FirebaseCore in Frameworks */,
 				A5867D5C2D85F42A00AF3470 /* FirebaseStorage in Frameworks */,
 				A5867D542D85F42A00AF3470 /* FirebaseAuth in Frameworks */,
+				A5867EB42D864F1B00AF3470 /* SwiftUIInfiniteCarousel in Frameworks */,
 				A5867D5F2D85F45000AF3470 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +104,7 @@
 				A5867D5B2D85F42A00AF3470 /* FirebaseStorage */,
 				A5867D5E2D85F45000AF3470 /* GoogleSignIn */,
 				A5867D602D85F45000AF3470 /* GoogleSignInSwift */,
+				A5867EB32D864F1B00AF3470 /* SwiftUIInfiniteCarousel */,
 			);
 			productName = investiGATE;
 			productReference = A5867D002D85F18F00AF3470 /* investiGATE.app */;
@@ -134,6 +137,7 @@
 			packageReferences = (
 				A5867D522D85F42A00AF3470 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A5867D5D2D85F45000AF3470 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				A5867EB22D864F1B00AF3470 /* XCRemoteSwiftPackageReference "SwiftUIInfiniteCarousel" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A5867D012D85F18F00AF3470 /* Products */;
@@ -385,6 +389,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		A5867EB22D864F1B00AF3470 /* XCRemoteSwiftPackageReference "SwiftUIInfiniteCarousel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dancarvajc/SwiftUIInfiniteCarousel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -422,6 +434,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A5867D5D2D85F45000AF3470 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		A5867EB32D864F1B00AF3470 /* SwiftUIInfiniteCarousel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5867EB22D864F1B00AF3470 /* XCRemoteSwiftPackageReference "SwiftUIInfiniteCarousel" */;
+			productName = SwiftUIInfiniteCarousel;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
