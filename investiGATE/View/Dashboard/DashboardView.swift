@@ -10,10 +10,11 @@ import SwiftUIInfiniteCarousel
 
 struct DashboardView: View {
     @EnvironmentObject var projectsService: Projects
+    @EnvironmentObject var auth: AuthViewModel
     @State var recentProjects: [Project] = []
     @State var recommendedProjects: [Project] = []
     @State var currentProjects: [Project] = []
-
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -42,7 +43,7 @@ struct DashboardView: View {
                             HStack {
                                 ForEach(recommendedProjects, id: \.self) { project in
                                     NavigationLink {
-                                        //TODO: ADD DETAIL PAGE
+                                        ProjectDetail(project: project)
                                     } label: {
                                         ProjectInfoCard(project: project)
                                     }
@@ -51,9 +52,9 @@ struct DashboardView: View {
                         }
                         .scrollIndicators(.hidden)
                     }
-                  
+                    
                     //CURRENT PROJECTS
-
+                    
                     VStack(alignment: .leading) {
                         Text("What you're working on")
                             .font(.title3).bold()
@@ -88,7 +89,18 @@ struct DashboardView: View {
         .task {
             await projectsService.fetchProjects()
             
-            print("got projects back?", projectsService.projects)
+            if let user = auth.user {
+                
+                // limit recent projects by 5 most recent projects from allprojects
+                //recentProjects = projectsService.projects.filter{ $0.departments.contains(user.majorDepartment) }
+                recommendedProjects = projectsService.projects.filter{ $0.departments.contains(user.majorDepartment) }
+                //currentProjects =
+                print("got projects back?", projectsService.projects)
+            } else {
+                print("ERROR: user not logged in")
+            }
+            
+            
         }
     }
 }
@@ -143,4 +155,5 @@ struct DashboardView: View {
         ]
     )
     .environmentObject(Projects())
+    .environmentObject(AuthViewModel())
 }

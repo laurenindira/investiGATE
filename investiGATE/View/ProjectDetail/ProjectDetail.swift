@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ProjectDetail: View {
+    @EnvironmentObject var auth: AuthViewModel
     @State var project: Project
-    @State var user: User
+    //@State var user: User
     
     @State private var isFavorited: Bool = false
     
@@ -165,5 +166,6 @@ let sampleProject = Project(
 )
 
 #Preview {
-    ProjectDetail(project: sampleProject, user: sampleUser.first!)
+    ProjectDetail(project: sampleProject)
+        .environmentObject(AuthViewModel())
 }
