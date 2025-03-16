@@ -55,12 +55,14 @@ struct SignUpView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Text("password")
-                        GenTextField(placeholder: "password", text: $password)
+//                        GenTextField(placeholder: "password", text: $password)
+                        SecureTextField(placeholder: "password", showPassword: showPassword, text: $password)
                     }
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Text("confirm password")
-                        GenTextField(placeholder: "confirm password", text: $confirmPassword)
+//                        GenTextField(placeholder: "confirm password", text: $confirmPassword)
+                        SecureTextField(placeholder: "confirm password", showPassword: showPassword, text: $confirmPassword)
                     }
                 }
                 .padding(.bottom, 40)
