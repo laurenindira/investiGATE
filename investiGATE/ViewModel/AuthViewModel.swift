@@ -53,12 +53,12 @@ class AuthViewModel: NSObject, ObservableObject {
     }
     
     //MARK: - Sign up
-    func signUpWithEmail(tempUser: User, password: String) async throws {
+    func signUpWithEmail(tempUser: User, email: String, password: String) async throws {
         self.isLoading = true
         
         do {
-            let result = try await auth.createUser(withEmail: tempUser.email, password: password)
-            let user = User(id: result.user.uid, displayName: tempUser.displayName, email: tempUser.email, creationDate: Date(), providerRef: "email/password", isProfessor: tempUser.isProfessor, researchInterests: tempUser.researchInterests, majorDepartment: tempUser.majorDepartment, bio: "", profilePicture: "", gradDate: tempUser.gradDate ?? nil, currentYear: tempUser.currentYear ?? nil, link: [])
+            let result = try await auth.createUser(withEmail: email, password: password)
+            let user = User(id: result.user.uid, displayName: tempUser.displayName, email: email, creationDate: Date(), providerRef: "email/password", isProfessor: tempUser.isProfessor, researchInterests: tempUser.researchInterests, majorDepartment: tempUser.majorDepartment, bio: "", profilePicture: "", gradDate: tempUser.gradDate ?? nil, currentYear: tempUser.currentYear ?? nil, link: [])
             self.user = user
             try await saveUserToFirestore(user: user)
             saveUserToCache(user: user)

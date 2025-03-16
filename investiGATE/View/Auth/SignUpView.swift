@@ -97,7 +97,7 @@ struct SignUpView: View {
     func emailSignUp() {
         Task {
             do {
-                try await auth.signUpWithEmail(tempUser: tempUser, password: password)
+                try await auth.signUpWithEmail(tempUser: tempUser, email: email, password: password)
             } catch {
                 showAlert = true
             }

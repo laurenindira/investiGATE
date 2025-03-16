@@ -48,7 +48,8 @@ struct SignInView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         Text("password")
-                        GenTextField(placeholder: "password", text: $email)
+                        SecureTextField(placeholder: "passwpord", showPassword: showPassword, text: $password)
+//                        GenTextField(placeholder: "password", text: $email)
                     }
                 }
                 .padding(.bottom, 40)
