@@ -89,11 +89,8 @@ struct ProfileView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
-                            ProjectCard(project: project)
+                            ProjectInfoCard(project: project)
                         }
-                        .padding(.horizontal)
-                        .padding(.bottom, 60)
-                        .frame(height: 300)
                     }
                     
                     // Past Projects
@@ -104,11 +101,8 @@ struct ProfileView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 15) {
-                            ProjectCard(project: project)
+                            ProjectInfoCard(project: project)
                         }
-                        .padding(.horizontal)
-                        .padding(.bottom, 60)
-                        .frame(height: 300)
                     }
                     
                     // Saved Projects
