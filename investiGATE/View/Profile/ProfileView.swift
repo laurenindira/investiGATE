@@ -30,7 +30,7 @@ struct ProfileView: View {
                             .bold()
                             .foregroundColor(Color.darkblue)
                         
-                        Text("junior cs + english major")
+                        Text(user.majorDepartment.joined(separator: ", "))
                             .foregroundColor(Color.lightblue)
                     }
                     
