@@ -9,10 +9,11 @@ import SwiftUI
 import SwiftUIInfiniteCarousel
 
 struct DashboardView: View {
+    @EnvironmentObject var projectsService: Projects
     @State var recentProjects: [Project] = []
     @State var recommendedProjects: [Project] = []
     @State var currentProjects: [Project] = []
-    
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -33,7 +34,6 @@ struct DashboardView: View {
                         CarouselView(featuredProjects: recentProjects)
                     }
                     
-                    //RECOMMNEDED PROJECTS
                     VStack(alignment: .leading) {
                         Text("These might spark your interest...")
                             .font(.title3).bold()
@@ -51,8 +51,9 @@ struct DashboardView: View {
                         }
                         .scrollIndicators(.hidden)
                     }
-                    
+                  
                     //CURRENT PROJECTS
+
                     VStack(alignment: .leading) {
                         Text("What you're working on")
                             .font(.title3).bold()
@@ -84,6 +85,11 @@ struct DashboardView: View {
                 .padding()
             }
         }
+        .task {
+            await projectsService.fetchProjects()
+            
+            print("got projects back?", projectsService.projects)
+        }
     }
 }
 
@@ -95,7 +101,8 @@ struct DashboardView: View {
                 title: "GRNsight: Defining Gene Regulatory Networks",
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
-                projectLead: "Dondi",
+                projectLeadId: "1",
+                projectLeadName: "Dondi",
                 description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
@@ -109,7 +116,8 @@ struct DashboardView: View {
                 title: "GRNsight: Defining Gene Regulatory Networks",
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
-                projectLead: "Dondi",
+                projectLeadId: "1",
+                projectLeadName: "Dondi",
                 description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
@@ -125,7 +133,8 @@ struct DashboardView: View {
                 title: "GRNsight: Defining Gene Regulatory Networks",
                 departments: ["CMSI", "BIOL"],
                 topics: ["Genes", "Web Development"],
-                projectLead: "Dondi",
+                projectLeadId: "1",
+                projectLeadName: "Dondi",
                 description: "Modeling gene regulatory networks and protein-protein interactions.",
                 team: ["1", "2"],
                 requirements: "bio or cmsi major",
@@ -133,4 +142,5 @@ struct DashboardView: View {
             )
         ]
     )
+    .environmentObject(Projects())
 }

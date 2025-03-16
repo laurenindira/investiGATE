@@ -13,7 +13,8 @@ struct Project: Identifiable, Codable, Hashable {
     var title: String
     var departments: [String]
     var topics: [String]
-    var projectLead: String //maybe professor object?
+    var projectLeadId: String
+    var projectLeadName: String //maybe professor object?
     var description: String
     var team: [String] // list of userIds
     var requirements: String // requirements for someone to join research team

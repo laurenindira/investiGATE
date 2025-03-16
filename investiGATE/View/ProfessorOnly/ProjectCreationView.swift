@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ProjectCreationView: View {
     @EnvironmentObject var auth: AuthViewModel
-//    @EnvironmentObject var projectVM: ProjectViewModel
-    
-    @State var title: String
-    @State var departmentText: String
-    @State var topicText: String
-    @State var description: String
-    @State var requirements: String // requirements for someone to join research team
-    @Binding var hiring: Bool
+    @EnvironmentObject var projectsService: Projects
+    @State var title: String = ""
+    @State var departmentText: String = ""
+    @State var topicText: String = ""
+    @State var description: String = ""
+    @State var requirements: String = "" // requirements for someone to join research team
+    @State var hiring: Bool = true
     
     var body: some View {
         NavigationStack {
@@ -73,12 +72,12 @@ struct ProjectCreationView: View {
                         //addingProject = false
                     } label: {
                         GenButton(placeholder: "add project", backgroundColor: Color.prim, foregroundColor: Color.white, isSystemImage: false)
-                    }
+                    } .disabled(title.isEmpty || departmentText.isEmpty || topicText.isEmpty || description.isEmpty || requirements.isEmpty)
                 }
                 .padding()
             }
             .navigationTitle("Add a Project")
-        
+            
         }
     }
     
@@ -86,10 +85,28 @@ struct ProjectCreationView: View {
         let departmentList = departmentText.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces)}
         let topicList = topicText.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
         
-        //TODO: add whatever firebase things are needed here
+        Task {
+            do {
+                try await projectsService.createProject(title: title, departments: departmentList, topics: topicList, description: description, team: [""], requirements: requirements, hiring: hiring, thumbnailURL: nil)
+                
+                resetFields()
+            } catch {
+                print("Error in creating project")
+            }
+        }
+    }
+    
+    func resetFields() {
+        title = ""
+        departmentText = ""
+        topicText = ""
+        description = ""
+        requirements = ""
+        hiring = true
     }
 }
 
 #Preview {
-    ProjectCreationView(title: "", departmentText: "", topicText: "", description: "", requirements: "", hiring: .constant(true))
+    ProjectCreationView(title: "", departmentText: "", topicText: "", description: "", requirements: "", hiring: true)
+        .environmentObject(Projects())
 }
