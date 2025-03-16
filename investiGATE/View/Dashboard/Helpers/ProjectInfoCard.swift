@@ -13,7 +13,7 @@ struct ProjectInfoCard: View {
     var body: some View {
         VStack(alignment: .leading) {
             //IMAGE
-            if project.thumbnailURL != nil {
+            if (project.thumbnailURL != nil) && (project.thumbnailURL != "") {
                 AsyncImage(url: URL(string: project.thumbnailURL!)) { image in
                     image.resizable()
                 } placeholder: {
